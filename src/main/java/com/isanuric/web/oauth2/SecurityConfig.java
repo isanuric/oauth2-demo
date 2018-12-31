@@ -47,8 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private ClientRegistration googleClientRegistry() {
         return ClientRegistration.withRegistrationId("google")
-                .clientId("YOUR-CONFIG")
-                .clientSecret("YOUR-CONFIG")
+                .clientId("492146879945-o6bpnd34nhhjhjtam1l9tsa2vnla2uva.apps.googleusercontent.com")
+                .clientSecret("t4tBG6XUD7PbYUDy8091e_p9")
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .redirectUriTemplate("{baseUrl}/login/oauth2/code/{registrationId}")
                 .authorizationUri("https://accounts.google.com/o/oauth2/auth")
