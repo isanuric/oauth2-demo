@@ -1,6 +1,3 @@
-server:
-  port: 8080
-
 logging:
   level:
     root: INFO
@@ -15,9 +12,9 @@ spring:
       client:
         registration:
           google:
-            client-id:
-            client-secret:
+            client-id: ADD-YOUR-CONFIGURATION
+            client-secret: ADD-YOUR-CONFIGURATION
             scope: openid, profile
           github:
-            client-id:
-            client-secret:
+            client-id: ADD-YOUR-CONFIGURATION
+            client-secret: ADD-YOUR-CONFIGURATION
