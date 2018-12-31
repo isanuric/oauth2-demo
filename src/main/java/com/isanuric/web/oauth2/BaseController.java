@@ -26,11 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class BaseController {
-//
-//    @GetMapping("/login/oauth2/code/google")
-//    public String google() {
-//        return "sss";
-//    }
 
 //    @Autowired
 //    private OAuth2AuthorizedClientService authorizedClientService;
@@ -39,9 +34,10 @@ public class BaseController {
     private ObjectMapper objectMapper;
 
     @GetMapping("/user-info")
-    public Object github(OAuth2AuthenticationToken auth2AuthenticationToken) {
+    public Object userInfo(OAuth2AuthenticationToken auth2AuthenticationToken) {
             ObjectNode objectNode = objectMapper.createObjectNode();
-            objectNode.put("a", auth2AuthenticationToken.getAuthorizedClientRegistrationId());
+            objectNode.put("id", auth2AuthenticationToken.getAuthorizedClientRegistrationId());
+            objectNode.put("name", auth2AuthenticationToken.getName());
          return objectNode;
     }
 
