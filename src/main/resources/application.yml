@@ -20,4 +20,4 @@ spring:
             scope: openid, profile
           github:
             client-id:
-            client-secret:
+            client-secret: 000
