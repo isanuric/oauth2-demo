@@ -17,6 +17,7 @@ import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
  */
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 //    @Value("${spring.security.oauth2.client.registration.google.clientId}")
@@ -47,8 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private ClientRegistration googleClientRegistry() {
         return ClientRegistration.withRegistrationId("google")
-                .clientId("492146879945-o6bpnd34nhhjhjtam1l9tsa2vnla2uva.apps.googleusercontent.com")
-                .clientSecret("t4tBG6XUD7PbYUDy8091e_p9")
+                .clientId("YOUR_CONF")
+                .clientSecret("YOUR_CONF")
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .redirectUriTemplate("{baseUrl}/login/oauth2/code/{registrationId}")
                 .authorizationUri("https://accounts.google.com/o/oauth2/auth")
