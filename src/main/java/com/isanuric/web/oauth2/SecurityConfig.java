@@ -1,5 +1,10 @@
 package com.isanuric.web.oauth2;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,6 +23,7 @@ import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
 
 @Configuration
 @EnableWebSecurity
+//@EnableRedisHttpSession
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 //    @Value("${spring.security.oauth2.client.registration.google.clientId}")
@@ -29,9 +35,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //    @Value("${spring.security.oauth2.client.registration.google.redirectUriTemplate}")
 //    private String redirectUriTemplate;
 
+    private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http
                 .authorizeRequests()
                 .antMatchers("/login", "/error").permitAll()
@@ -46,10 +55,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new InMemoryClientRegistrationRepository(this.googleClientRegistry());
     }
 
+    @Bean
+    public ServletContextInitializer servletContextInitializer() {
+        return new ServletContextInitializer() {
+
+            @Override
+            public void onStartup(ServletContext servletContext) throws ServletException {
+                servletContext.getSessionCookieConfig().setName("OAUTH2ID");
+            }
+        };
+    }
+
     private ClientRegistration googleClientRegistry() {
         return ClientRegistration.withRegistrationId("google")
-                .clientId("YOUR_CONF")
-                .clientSecret("YOUR_CONF")
+//                .clientId("YOUR_CONF")
+//                .clientSecret("YOUR_CONF")
+                .clientId("492146879945-o6bpnd34nhhjhjtam1l9tsa2vnla2uva.apps.googleusercontent.com")
+                .clientSecret("t4tBG6XUD7PbYUDy8091e_p9")
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .redirectUriTemplate("{baseUrl}/login/oauth2/code/{registrationId}")
                 .authorizationUri("https://accounts.google.com/o/oauth2/auth")
